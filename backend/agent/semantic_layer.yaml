@@ -1,0 +1,71 @@
+# Business meaning of the Olist data. The agent reads this to understand the tables
+# and to build root-cause queries. Every metric is measured per ORDER (base table: orders, alias o).
+
+base_table: orders
+base_alias: o
+
+date_columns:
+  order_purchase_timestamp: when the customer placed the order (default for "orders in a month")
+  order_approved_at: when payment was approved
+  order_delivered_carrier_date: when the seller handed the order to the carrier
+  order_delivered_customer_date: when the customer received the order
+  order_estimated_delivery_date: delivery date promised to the customer
+
+tables:
+  orders:
+    key: [order_id]
+    description: one row per order; order_status is one of delivered, shipped, canceled, unavailable, invoiced, processing, created, approved
+  customers:
+    key: [customer_id]
+    description: one row per customer_id (a person can have several customer_ids; customer_unique_id identifies the person); customer_state is a 2-letter Brazilian state code
+  order_items:
+    key: [order_id, order_item_id]
+    description: one row per item in an order; price and freight_value in BRL; links product and seller
+  order_payments:
+    key: [order_id, payment_sequential]
+    description: one row per payment of an order; payment_type is credit_card, boleto, voucher, debit_card or not_defined; payment_value in BRL
+  order_reviews:
+    key: [review_id, order_id]
+    description: customer review of an order; review_score from 1 (worst) to 5 (best)
+  products:
+    key: [product_id]
+    description: product catalogue; product_category_name is in Portuguese (see category_translation for English)
+  sellers:
+    key: [seller_id]
+    description: one row per seller; seller_state is a 2-letter Brazilian state code
+  category_translation:
+    key: [product_category_name]
+    description: Portuguese category name -> product_category_name_english
+  geolocation:
+    key: []
+    description: zip code prefix -> latitude/longitude (many rows per prefix)
+
+# How each table joins to the order (alias o). Metric queries use LEFT JOIN, dimension queries use JOIN.
+joins:
+  customers: {alias: c, "on": c.customer_id = o.customer_id}
+  order_items: {alias: oi, "on": oi.order_id = o.order_id}
+  order_payments: {alias: op, "on": op.order_id = o.order_id}
+  order_reviews: {alias: r, "on": r.order_id = o.order_id}
+  products: {alias: p, "on": p.product_id = oi.product_id, requires: [order_items]}
+  sellers: {alias: s, "on": s.seller_id = oi.seller_id, requires: [order_items]}
+
+# Segments the agent breaks every metric change down by.
+dimensions:
+  customer_state: {sql: c.customer_state, joins: [customers]}
+  customer_city: {sql: c.customer_city, joins: [customers]}
+  seller_id: {sql: oi.seller_id, joins: [order_items]}
+  seller_state: {sql: s.seller_state, joins: [order_items, sellers]}
+  product_category: {sql: p.product_category_name, joins: [order_items, products]}
+  payment_type: {sql: op.payment_type, joins: [order_payments]}
+
+glossary:
+  - "Number of orders = COUNT of orders by order_purchase_timestamp. Per-order value: 1."
+  - "Delivered orders = orders with order_status = 'delivered'."
+  - "Revenue / GMV = SUM(order_payments.payment_value). Per-order value: SUM(op.payment_value)."
+  - "Item revenue = SUM(order_items.price); freight = SUM(order_items.freight_value)."
+  - "Late delivery = delivered order with order_delivered_customer_date > order_estimated_delivery_date. Late delivery rate is the share of delivered orders that were late."
+  - "Cancellation rate = share of orders with order_status = 'canceled'."
+  - "Average review score = AVG(order_reviews.review_score)."
+  - "Delivery time (days) = order_delivered_customer_date - order_purchase_timestamp, in days."
+  - "Average order value (AOV) = revenue per order."
+  - "Product categories are Portuguese in products.product_category_name (e.g. beleza_saude = health_beauty, cama_mesa_banho = bed_bath_table)."
