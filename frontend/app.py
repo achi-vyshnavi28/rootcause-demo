@@ -1,6 +1,7 @@
 """RootCause web UI. Run with:  streamlit run frontend/app.py"""
 
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -10,6 +11,14 @@ import streamlit as st
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
+
+# Hosted demo: expose Streamlit Cloud secrets (e.g. GEMINI_API_KEY) as environment variables for LiteLLM.
+try:
+    for _key, _value in st.secrets.items():
+        if isinstance(_value, str):
+            os.environ.setdefault(_key, _value)
+except Exception:  # no secrets.toml locally: settings come from .env
+    pass
 
 from backend import config  # noqa: E402
 from backend.agent.runner import run_question  # noqa: E402
@@ -87,6 +96,16 @@ def show_report(result: dict) -> None:
         for item in report["next_checks"]:
             st.markdown(f"- {item}")
         st.markdown(f"**Suggested experiment:** {report['suggested_experiment']}")
+    elif report.get("type") == "error":
+        message = str(report.get("answer", ""))
+        if "API key" in message or "API_KEY" in message:
+            st.error("The AI model's API key is missing or invalid. Add GEMINI_API_KEY in the app's secrets / .env.")
+        elif "503" in message or "high demand" in message or "RateLimit" in message:
+            st.error("The free AI model is busy right now. Please try again in a minute.")
+        else:
+            st.error("The investigation failed. Details are below.")
+        with st.expander("Technical details"):
+            st.code(message[:3000])
     else:
         st.markdown(report.get("answer", ""))
 
@@ -115,8 +134,13 @@ def show_report(result: dict) -> None:
 with ask_tab:
     if "dataset_choice" in st.session_state:
         dataset = st.session_state.pop("dataset_choice")
-    question = st.text_input("Your question", key="question", placeholder="Why did orders drop last month?")
-    if st.button("Investigate", type="primary") and question.strip():
+    question = st.text_input("Your question", key="question",
+                             placeholder="Type a question, e.g. Why did orders drop in April 2018 compared to March 2018?")
+    st.caption("Tip: pick an example in the sidebar (» at the top left on small screens). An investigation takes about 1-3 minutes.")
+    clicked = st.button("Investigate", type="primary")
+    if clicked and not question.strip():
+        st.warning("Please type a question first. The grey text is only an example.")
+    if clicked and question.strip():
         with st.spinner("Investigating: planning, querying, checking..."):
             st.session_state["last_result"] = run_question(question.strip(), dataset)
     if "last_result" in st.session_state:
