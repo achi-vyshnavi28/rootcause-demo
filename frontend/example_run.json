@@ -1,0 +1,1053 @@
+{
+ "run_id": "a46fa255-091c-441f-9172-243e578b4e01",
+ "question": "Why did the number of orders drop in April 2018 compared to March 2018?",
+ "dataset": "olist_lab",
+ "status": "ok",
+ "report": {
+  "type": "root_cause",
+  "summary": "Total orders dropped by 731.0 (-10.14%) in April 2018 compared to March 2018 [Q1]. The decrease was primarily driven by a sharp drop in orders from customer state MG, accounting for 63.32% of the total change [Q2].",
+  "root_cause_explanation": "Orders from customer state MG fell by 552.0, dropping from 879.0 in March to 327.0 in April [Q2]. Within MG, customer city Belo Horizonte saw orders fall by 139.0, from 223.0 to 84.0 [Q3]. This localized drop aligns with operational updates noting that the fulfilment hub serving Minas Gerais was paused for flood-damage repairs, leading to longer delivery estimates [D1].",
+  "next_checks": [
+   "Verify if the Minas Gerais (MG) fulfilment hub has fully resumed normal operations following the flood-damage repairs.",
+   "Check whether marketplace sellers have restored their temporarily hidden listings for MG postcodes.",
+   "Review customer support inquiry volumes from MG regarding extended delivery times."
+  ],
+  "suggested_experiment": "Run a targeted promotional campaign or free shipping incentive for MG postcodes now that operations are restoring, and closely monitor the weekly order volume from the MG segment.",
+  "confidence": "high",
+  "evidence": {
+   "metric": "number of orders",
+   "kind": "total",
+   "period_a": [
+    "2018-03-01",
+    "2018-04-01"
+   ],
+   "period_b": [
+    "2018-04-01",
+    "2018-05-01"
+   ],
+   "overall_change": {
+    "value_a": 7211.0,
+    "value_b": 6480.0,
+    "delta": -731.0,
+    "pct_change": -10.137290251005409,
+    "query_id": "Q1"
+   },
+   "top_candidates": [
+    {
+     "dimension": "customer_state",
+     "segment": "MG",
+     "value_a": 879.0,
+     "value_b": 327.0,
+     "change": -552.0,
+     "abnormal_change": -462.8932,
+     "share_of_change": 0.6332,
+     "query_id": "Q2"
+    },
+    {
+     "dimension": "customer_state",
+     "segment": "SP",
+     "value_a": 3037.0,
+     "value_b": 3059.0,
+     "change": 22.0,
+     "abnormal_change": 329.8695,
+     "share_of_change": -0.4513,
+     "query_id": "Q2"
+    },
+    {
+     "dimension": "product_category",
+     "segment": "informatica_acessorios",
+     "value_a": 638.0,
+     "value_b": 439.0,
+     "change": -199.0,
+     "abnormal_change": -135.2702,
+     "share_of_change": 0.185,
+     "query_id": "Q6"
+    },
+    {
+     "dimension": "customer_city",
+     "segment": "sao paulo",
+     "value_a": 1151.0,
+     "value_b": 1166.0,
+     "change": 15.0,
+     "abnormal_change": 131.6802,
+     "share_of_change": -0.1801,
+     "query_id": "Q3"
+    },
+    {
+     "dimension": "customer_city",
+     "segment": "belo horizonte",
+     "value_a": 223.0,
+     "value_b": 84.0,
+     "change": -139.0,
+     "abnormal_change": -116.3938,
+     "share_of_change": 0.1592,
+     "query_id": "Q3"
+    }
+   ],
+   "drill_down_inside_top_candidate": [
+    {
+     "dimension": "seller_state",
+     "segment": "MG",
+     "value_a": 99.0,
+     "value_b": 48.0,
+     "share_of_change_within": -0.020466557317295426,
+     "query_id": "Q10"
+    },
+    {
+     "dimension": "product_category",
+     "segment": "cool_stuff",
+     "value_a": 39.0,
+     "value_b": 5.0,
+     "share_of_change_within": 0.016455018056272072,
+     "query_id": "Q11"
+    },
+    {
+     "dimension": "seller_id",
+     "segment": "dbc22125167c298ef99da25668e1011f",
+     "value_a": 5.0,
+     "value_b": 10.0,
+     "share_of_change_within": -0.014426763424795062,
+     "query_id": "Q9"
+    }
+   ],
+   "data_quality_findings": [],
+   "related_documents": [
+    {
+     "doc_ref": "D1",
+     "doc_id": "2018-04-03_ops_mg_warehouse",
+     "title": "Ops update: Belo Horizonte fulfilment hub paused",
+     "type": "ops_update",
+     "date": "2018-04-03",
+     "excerpt": "The fulfilment hub serving Minas Gerais (MG) is paused for three weeks for a flood-damage repair. During this period checkout shows longer delivery estimates for MG postcodes and several marketplace sellers temporarily hid their listings for MG.\n\nExpect lower order volume from MG customers in April. Other states are served from Sao Paulo as usual."
+    },
+    {
+     "doc_ref": "D2",
+     "doc_id": "sop_late_delivery_investigation",
+     "title": "SOP: investigating a rise in late deliveries",
+     "type": "sop",
+     "date": null,
+     "excerpt": "1. Confirm the metric: late = delivered after order_estimated_delivery_date, among delivered orders only.\n2. Break down by customer state, seller state and seller to see whether the rise is regional or seller-specific.\n3. Check carrier incident logs for the same weeks.\n4. If one region dominates, contact the regional carrier manager before changing delivery promises."
+    },
+    {
+     "doc_ref": "D3",
+     "doc_id": "2018-05-07_quality_beleza_saude_batch",
+     "title": "Quality alert: faulty batch from a health & beauty supplier",
+     "type": "quality_alert",
+     "date": "2018-05-07",
+     "excerpt": "A large supplier in the beleza_saude (health & beauty) category shipped a batch of products with broken seals and leaking containers. Customers who received items from this batch in May are leaving 1-star reviews.\n\nAction: remove the batch from sale, offer refunds, and monitor the review score for the category."
+    }
+   ],
+   "confidence": "high"
+  },
+  "unsupported_numbers": []
+ },
+ "queries": [
+  {
+   "query_id": "Q1",
+   "purpose": "Total number of orders, period A vs B",
+   "sql_submitted": "WITH base AS (SELECT o.order_id, CASE WHEN (o.order_purchase_timestamp >= '2018-04-01' AND o.order_purchase_timestamp < '2018-05-01') THEN 'B' ELSE 'A' END AS period, 1 AS v FROM olist_lab.orders o  WHERE ((o.order_purchase_timestamp >= '2018-03-01' AND o.order_purchase_timestamp < '2018-04-01') OR (o.order_purchase_timestamp >= '2018-04-01' AND o.order_purchase_timestamp < '2018-05-01')) GROUP BY o.order_id, 2) SELECT period, SUM(v) AS total, COUNT(v) AS n, COUNT(*) AS orders FROM base GROUP BY period",
+   "sql_executed": "WITH base AS (SELECT o.order_id, CASE WHEN (o.order_purchase_timestamp >= '2018-04-01' AND o.order_purchase_timestamp < '2018-05-01') THEN 'B' ELSE 'A' END AS period, 1 AS v FROM olist_lab.orders AS o WHERE ((o.order_purchase_timestamp >= '2018-03-01' AND o.order_purchase_timestamp < '2018-04-01') OR (o.order_purchase_timestamp >= '2018-04-01' AND o.order_purchase_timestamp < '2018-05-01')) GROUP BY o.order_id, 2) SELECT period, SUM(v) AS total, COUNT(v) AS n, COUNT(*) AS orders FROM base GROUP BY period LIMIT 1000",
+   "row_count": 2,
+   "duration_ms": 92,
+   "preview": [
+    {
+     "period": "A",
+     "total": 7211.0,
+     "n": 7211,
+     "orders": 7211
+    },
+    {
+     "period": "B",
+     "total": 6480.0,
+     "n": 6480,
+     "orders": 6480
+    }
+   ]
+  },
+  {
+   "query_id": "Q2",
+   "purpose": "number of orders by customer_state",
+   "sql_submitted": "WITH base AS (SELECT o.order_id, CASE WHEN (o.order_purchase_timestamp >= '2018-04-01' AND o.order_purchase_timestamp < '2018-05-01') THEN 'B' ELSE 'A' END AS period, 1 AS v FROM olist_lab.orders o  WHERE ((o.order_purchase_timestamp >= '2018-03-01' AND o.order_purchase_timestamp < '2018-04-01') OR (o.order_purchase_timestamp >= '2018-04-01' AND o.order_purchase_timestamp < '2018-05-01')) GROUP BY o.order_id, 2), seg AS (SELECT DISTINCT b.order_id, CAST(c.customer_state AS TEXT) AS segment FROM base b JOIN olist_lab.orders o ON o.order_id = b.order_id JOIN olist_lab.customers c ON c.customer_id = o.customer_id) SELECT COALESCE(seg.segment, '(none)') AS segment, b.period, SUM(b.v) AS total, COUNT(b.v) AS n, COUNT(*) AS orders FROM base b LEFT JOIN seg ON seg.order_id = b.order_id GROUP BY 1, 2",
+   "sql_executed": "WITH base AS (SELECT o.order_id, CASE WHEN (o.order_purchase_timestamp >= '2018-04-01' AND o.order_purchase_timestamp < '2018-05-01') THEN 'B' ELSE 'A' END AS period, 1 AS v FROM olist_lab.orders AS o WHERE ((o.order_purchase_timestamp >= '2018-03-01' AND o.order_purchase_timestamp < '2018-04-01') OR (o.order_purchase_timestamp >= '2018-04-01' AND o.order_purchase_timestamp < '2018-05-01')) GROUP BY o.order_id, 2), seg AS (SELECT DISTINCT b.order_id, CAST(c.customer_state AS TEXT) AS segment FROM base AS b JOIN olist_lab.orders AS o ON o.order_id = b.order_id JOIN olist_lab.customers AS c ON c.customer_id = o.customer_id) SELECT COALESCE(seg.segment, '(none)') AS segment, b.period, SUM(b.v) AS total, COUNT(b.v) AS n, COUNT(*) AS orders FROM base AS b LEFT JOIN seg ON seg.order_id = b.order_id GROUP BY 1, 2 LIMIT 20000",
+   "row_count": 54,
+   "duration_ms": 128,
+   "preview": [
+    {
+     "segment": "MG",
+     "period": "A",
+     "total": 879.0,
+     "n": 879,
+     "orders": 879
+    },
+    {
+     "segment": "PR",
+     "period": "B",
+     "total": 386.0,
+     "n": 386,
+     "orders": 386
+    },
+    {
+     "segment": "RJ",
+     "period": "A",
+     "total": 907.0,
+     "n": 907,
+     "orders": 907
+    },
+    {
+     "segment": "RN",
+     "period": "B",
+     "total": 32.0,
+     "n": 32,
+     "orders": 32
+    },
+    {
+     "segment": "RO",
+     "period": "A",
+     "total": 13.0,
+     "n": 13,
+     "orders": 13
+    },
+    {
+     "segment": "AC",
+     "period": "A",
+     "total": 2.0,
+     "n": 2,
+     "orders": 2
+    },
+    {
+     "segment": "PR",
+     "period": "A",
+     "total": 377.0,
+     "n": 377,
+     "orders": 377
+    },
+    {
+     "segment": "RJ",
+     "period": "B",
+     "total": 834.0,
+     "n": 834,
+     "orders": 834
+    },
+    {
+     "segment": "MG",
+     "period": "B",
+     "total": 327.0,
+     "n": 327,
+     "orders": 327
+    },
+    {
+     "segment": "RN",
+     "period": "A",
+     "total": 39.0,
+     "n": 39,
+     "orders": 39
+    }
+   ]
+  },
+  {
+   "query_id": "Q3",
+   "purpose": "number of orders by customer_city",
+   "sql_submitted": "WITH base AS (SELECT o.order_id, CASE WHEN (o.order_purchase_timestamp >= '2018-04-01' AND o.order_purchase_timestamp < '2018-05-01') THEN 'B' ELSE 'A' END AS period, 1 AS v FROM olist_lab.orders o  WHERE ((o.order_purchase_timestamp >= '2018-03-01' AND o.order_purchase_timestamp < '2018-04-01') OR (o.order_purchase_timestamp >= '2018-04-01' AND o.order_purchase_timestamp < '2018-05-01')) GROUP BY o.order_id, 2), seg AS (SELECT DISTINCT b.order_id, CAST(c.customer_city AS TEXT) AS segment FROM base b JOIN olist_lab.orders o ON o.order_id = b.order_id JOIN olist_lab.customers c ON c.customer_id = o.customer_id) SELECT COALESCE(seg.segment, '(none)') AS segment, b.period, SUM(b.v) AS total, COUNT(b.v) AS n, COUNT(*) AS orders FROM base b LEFT JOIN seg ON seg.order_id = b.order_id GROUP BY 1, 2",
+   "sql_executed": "WITH base AS (SELECT o.order_id, CASE WHEN (o.order_purchase_timestamp >= '2018-04-01' AND o.order_purchase_timestamp < '2018-05-01') THEN 'B' ELSE 'A' END AS period, 1 AS v FROM olist_lab.orders AS o WHERE ((o.order_purchase_timestamp >= '2018-03-01' AND o.order_purchase_timestamp < '2018-04-01') OR (o.order_purchase_timestamp >= '2018-04-01' AND o.order_purchase_timestamp < '2018-05-01')) GROUP BY o.order_id, 2), seg AS (SELECT DISTINCT b.order_id, CAST(c.customer_city AS TEXT) AS segment FROM base AS b JOIN olist_lab.orders AS o ON o.order_id = b.order_id JOIN olist_lab.customers AS c ON c.customer_id = o.customer_id) SELECT COALESCE(seg.segment, '(none)') AS segment, b.period, SUM(b.v) AS total, COUNT(b.v) AS n, COUNT(*) AS orders FROM base AS b LEFT JOIN seg ON seg.order_id = b.order_id GROUP BY 1, 2 LIMIT 20000",
+   "row_count": 2514,
+   "duration_ms": 108,
+   "preview": [
+    {
+     "segment": "itaperuna",
+     "period": "B",
+     "total": 6.0,
+     "n": 6,
+     "orders": 6
+    },
+    {
+     "segment": "sao paulo",
+     "period": "A",
+     "total": 1151.0,
+     "n": 1151,
+     "orders": 1151
+    },
+    {
+     "segment": "laguna",
+     "period": "A",
+     "total": 2.0,
+     "n": 2,
+     "orders": 2
+    },
+    {
+     "segment": "avare",
+     "period": "B",
+     "total": 5.0,
+     "n": 5,
+     "orders": 5
+    },
+    {
+     "segment": "rio claro",
+     "period": "B",
+     "total": 5.0,
+     "n": 5,
+     "orders": 5
+    },
+    {
+     "segment": "franca",
+     "period": "A",
+     "total": 20.0,
+     "n": 20,
+     "orders": 20
+    },
+    {
+     "segment": "simoes filho",
+     "period": "B",
+     "total": 4.0,
+     "n": 4,
+     "orders": 4
+    },
+    {
+     "segment": "fortaleza",
+     "period": "B",
+     "total": 55.0,
+     "n": 55,
+     "orders": 55
+    },
+    {
+     "segment": "piracaia",
+     "period": "B",
+     "total": 2.0,
+     "n": 2,
+     "orders": 2
+    },
+    {
+     "segment": "carapicuiba",
+     "period": "A",
+     "total": 19.0,
+     "n": 19,
+     "orders": 19
+    }
+   ]
+  },
+  {
+   "query_id": "Q4",
+   "purpose": "number of orders by seller_id",
+   "sql_submitted": "WITH base AS (SELECT o.order_id, CASE WHEN (o.order_purchase_timestamp >= '2018-04-01' AND o.order_purchase_timestamp < '2018-05-01') THEN 'B' ELSE 'A' END AS period, 1 AS v FROM olist_lab.orders o  WHERE ((o.order_purchase_timestamp >= '2018-03-01' AND o.order_purchase_timestamp < '2018-04-01') OR (o.order_purchase_timestamp >= '2018-04-01' AND o.order_purchase_timestamp < '2018-05-01')) GROUP BY o.order_id, 2), seg AS (SELECT DISTINCT b.order_id, CAST(oi.seller_id AS TEXT) AS segment FROM base b JOIN olist_lab.orders o ON o.order_id = b.order_id JOIN olist_lab.order_items oi ON oi.order_id = o.order_id) SELECT COALESCE(seg.segment, '(none)') AS segment, b.period, SUM(b.v) AS total, COUNT(b.v) AS n, COUNT(*) AS orders FROM base b LEFT JOIN seg ON seg.order_id = b.order_id GROUP BY 1, 2",
+   "sql_executed": "WITH base AS (SELECT o.order_id, CASE WHEN (o.order_purchase_timestamp >= '2018-04-01' AND o.order_purchase_timestamp < '2018-05-01') THEN 'B' ELSE 'A' END AS period, 1 AS v FROM olist_lab.orders AS o WHERE ((o.order_purchase_timestamp >= '2018-03-01' AND o.order_purchase_timestamp < '2018-04-01') OR (o.order_purchase_timestamp >= '2018-04-01' AND o.order_purchase_timestamp < '2018-05-01')) GROUP BY o.order_id, 2), seg AS (SELECT DISTINCT b.order_id, CAST(oi.seller_id AS TEXT) AS segment FROM base AS b JOIN olist_lab.orders AS o ON o.order_id = b.order_id JOIN olist_lab.order_items AS oi ON oi.order_id = o.order_id) SELECT COALESCE(seg.segment, '(none)') AS segment, b.period, SUM(b.v) AS total, COUNT(b.v) AS n, COUNT(*) AS orders FROM base AS b LEFT JOIN seg ON seg.order_id = b.order_id GROUP BY 1, 2 LIMIT 20000",
+   "row_count": 2102,
+   "duration_ms": 106,
+   "preview": [
+    {
+     "segment": "04308b1ee57b6625f47df1d56f00eedf",
+     "period": "A",
+     "total": 26.0,
+     "n": 26,
+     "orders": 26
+    },
+    {
+     "segment": "cc419e0650a3c5ba77189a1882b7556a",
+     "period": "A",
+     "total": 98.0,
+     "n": 98,
+     "orders": 98
+    },
+    {
+     "segment": "4d6d651bd7684af3fffabd5f08d12e5a",
+     "period": "A",
+     "total": 51.0,
+     "n": 51,
+     "orders": 51
+    },
+    {
+     "segment": "f7720c4fa8e3aba4546301ab80ea1f1b",
+     "period": "B",
+     "total": 9.0,
+     "n": 9,
+     "orders": 9
+    },
+    {
+     "segment": "0dd184061fb0eaa7ca37932c68ab91c5",
+     "period": "B",
+     "total": 35.0,
+     "n": 35,
+     "orders": 35
+    },
+    {
+     "segment": "e7d5b006eb624f13074497221eb37807",
+     "period": "B",
+     "total": 5.0,
+     "n": 5,
+     "orders": 5
+    },
+    {
+     "segment": "7c67e1448b00f6e969d365cea6b010ab",
+     "period": "A",
+     "total": 139.0,
+     "n": 139,
+     "orders": 139
+    },
+    {
+     "segment": "259f7b5e6e482c230e5bfaa670b6bb8f",
+     "period": "B",
+     "total": 9.0,
+     "n": 9,
+     "orders": 9
+    },
+    {
+     "segment": "562fc2f2c2863ab7e79a9e4388a58a14",
+     "period": "B",
+     "total": 38.0,
+     "n": 38,
+     "orders": 38
+    },
+    {
+     "segment": "52f0fe436a347ddad7ed5f9aa4e27eaa",
+     "period": "A",
+     "total": 5.0,
+     "n": 5,
+     "orders": 5
+    }
+   ]
+  },
+  {
+   "query_id": "Q5",
+   "purpose": "number of orders by seller_state",
+   "sql_submitted": "WITH base AS (SELECT o.order_id, CASE WHEN (o.order_purchase_timestamp >= '2018-04-01' AND o.order_purchase_timestamp < '2018-05-01') THEN 'B' ELSE 'A' END AS period, 1 AS v FROM olist_lab.orders o  WHERE ((o.order_purchase_timestamp >= '2018-03-01' AND o.order_purchase_timestamp < '2018-04-01') OR (o.order_purchase_timestamp >= '2018-04-01' AND o.order_purchase_timestamp < '2018-05-01')) GROUP BY o.order_id, 2), seg AS (SELECT DISTINCT b.order_id, CAST(s.seller_state AS TEXT) AS segment FROM base b JOIN olist_lab.orders o ON o.order_id = b.order_id JOIN olist_lab.order_items oi ON oi.order_id = o.order_id JOIN olist_lab.sellers s ON s.seller_id = oi.seller_id) SELECT COALESCE(seg.segment, '(none)') AS segment, b.period, SUM(b.v) AS total, COUNT(b.v) AS n, COUNT(*) AS orders FROM base b LEFT JOIN seg ON seg.order_id = b.order_id GROUP BY 1, 2",
+   "sql_executed": "WITH base AS (SELECT o.order_id, CASE WHEN (o.order_purchase_timestamp >= '2018-04-01' AND o.order_purchase_timestamp < '2018-05-01') THEN 'B' ELSE 'A' END AS period, 1 AS v FROM olist_lab.orders AS o WHERE ((o.order_purchase_timestamp >= '2018-03-01' AND o.order_purchase_timestamp < '2018-04-01') OR (o.order_purchase_timestamp >= '2018-04-01' AND o.order_purchase_timestamp < '2018-05-01')) GROUP BY o.order_id, 2), seg AS (SELECT DISTINCT b.order_id, CAST(s.seller_state AS TEXT) AS segment FROM base AS b JOIN olist_lab.orders AS o ON o.order_id = b.order_id JOIN olist_lab.order_items AS oi ON oi.order_id = o.order_id JOIN olist_lab.sellers AS s ON s.seller_id = oi.seller_id) SELECT COALESCE(seg.segment, '(none)') AS segment, b.period, SUM(b.v) AS total, COUNT(b.v) AS n, COUNT(*) AS orders FROM base AS b LEFT JOIN seg ON seg.order_id = b.order_id GROUP BY 1, 2 LIMIT 20000",
+   "row_count": 37,
+   "duration_ms": 112,
+   "preview": [
+    {
+     "segment": "PR",
+     "period": "B",
+     "total": 504.0,
+     "n": 504,
+     "orders": 504
+    },
+    {
+     "segment": "RJ",
+     "period": "A",
+     "total": 304.0,
+     "n": 304,
+     "orders": 304
+    },
+    {
+     "segment": "MG",
+     "period": "A",
+     "total": 427.0,
+     "n": 427,
+     "orders": 427
+    },
+    {
+     "segment": "RO",
+     "period": "A",
+     "total": 1.0,
+     "n": 1,
+     "orders": 1
+    },
+    {
+     "segment": "RN",
+     "period": "B",
+     "total": 1.0,
+     "n": 1,
+     "orders": 1
+    },
+    {
+     "segment": "PR",
+     "period": "A",
+     "total": 602.0,
+     "n": 602,
+     "orders": 602
+    },
+    {
+     "segment": "MG",
+     "period": "B",
+     "total": 398.0,
+     "n": 398,
+     "orders": 398
+    },
+    {
+     "segment": "RJ",
+     "period": "B",
+     "total": 288.0,
+     "n": 288,
+     "orders": 288
+    },
+    {
+     "segment": "RN",
+     "period": "A",
+     "total": 3.0,
+     "n": 3,
+     "orders": 3
+    },
+    {
+     "segment": "SC",
+     "period": "B",
+     "total": 177.0,
+     "n": 177,
+     "orders": 177
+    }
+   ]
+  },
+  {
+   "query_id": "Q6",
+   "purpose": "number of orders by product_category",
+   "sql_submitted": "WITH base AS (SELECT o.order_id, CASE WHEN (o.order_purchase_timestamp >= '2018-04-01' AND o.order_purchase_timestamp < '2018-05-01') THEN 'B' ELSE 'A' END AS period, 1 AS v FROM olist_lab.orders o  WHERE ((o.order_purchase_timestamp >= '2018-03-01' AND o.order_purchase_timestamp < '2018-04-01') OR (o.order_purchase_timestamp >= '2018-04-01' AND o.order_purchase_timestamp < '2018-05-01')) GROUP BY o.order_id, 2), seg AS (SELECT DISTINCT b.order_id, CAST(p.product_category_name AS TEXT) AS segment FROM base b JOIN olist_lab.orders o ON o.order_id = b.order_id JOIN olist_lab.order_items oi ON oi.order_id = o.order_id JOIN olist_lab.products p ON p.product_id = oi.product_id) SELECT COALESCE(seg.segment, '(none)') AS segment, b.period, SUM(b.v) AS total, COUNT(b.v) AS n, COUNT(*) AS orders FROM base b LEFT JOIN seg ON seg.order_id = b.order_id GROUP BY 1, 2",
+   "sql_executed": "WITH base AS (SELECT o.order_id, CASE WHEN (o.order_purchase_timestamp >= '2018-04-01' AND o.order_purchase_timestamp < '2018-05-01') THEN 'B' ELSE 'A' END AS period, 1 AS v FROM olist_lab.orders AS o WHERE ((o.order_purchase_timestamp >= '2018-03-01' AND o.order_purchase_timestamp < '2018-04-01') OR (o.order_purchase_timestamp >= '2018-04-01' AND o.order_purchase_timestamp < '2018-05-01')) GROUP BY o.order_id, 2), seg AS (SELECT DISTINCT b.order_id, CAST(p.product_category_name AS TEXT) AS segment FROM base AS b JOIN olist_lab.orders AS o ON o.order_id = b.order_id JOIN olist_lab.order_items AS oi ON oi.order_id = o.order_id JOIN olist_lab.products AS p ON p.product_id = oi.product_id) SELECT COALESCE(seg.segment, '(none)') AS segment, b.period, SUM(b.v) AS total, COUNT(b.v) AS n, COUNT(*) AS orders FROM base AS b LEFT JOIN seg ON seg.order_id = b.order_id GROUP BY 1, 2 LIMIT 20000",
+   "row_count": 133,
+   "duration_ms": 130,
+   "preview": [
+    {
+     "segment": "automotivo",
+     "period": "B",
+     "total": 310.0,
+     "n": 310,
+     "orders": 310
+    },
+    {
+     "segment": "cool_stuff",
+     "period": "A",
+     "total": 242.0,
+     "n": 242,
+     "orders": 242
+    },
+    {
+     "segment": "instrumentos_musicais",
+     "period": "A",
+     "total": 51.0,
+     "n": 51,
+     "orders": 51
+    },
+    {
+     "segment": "perfumaria",
+     "period": "A",
+     "total": 186.0,
+     "n": 186,
+     "orders": 186
+    },
+    {
+     "segment": "construcao_ferramentas_iluminacao",
+     "period": "A",
+     "total": 12.0,
+     "n": 12,
+     "orders": 12
+    },
+    {
+     "segment": "alimentos_bebidas",
+     "period": "B",
+     "total": 15.0,
+     "n": 15,
+     "orders": 15
+    },
+    {
+     "segment": "fashion_underwear_e_moda_praia",
+     "period": "B",
+     "total": 6.0,
+     "n": 6,
+     "orders": 6
+    },
+    {
+     "segment": "alimentos",
+     "period": "B",
+     "total": 34.0,
+     "n": 34,
+     "orders": 34
+    },
+    {
+     "segment": "construcao_ferramentas_jardim",
+     "period": "B",
+     "total": 11.0,
+     "n": 11,
+     "orders": 11
+    },
+    {
+     "segment": "fashion_roupa_feminina",
+     "period": "A",
+     "total": 1.0,
+     "n": 1,
+     "orders": 1
+    }
+   ]
+  },
+  {
+   "query_id": "Q7",
+   "purpose": "number of orders by payment_type",
+   "sql_submitted": "WITH base AS (SELECT o.order_id, CASE WHEN (o.order_purchase_timestamp >= '2018-04-01' AND o.order_purchase_timestamp < '2018-05-01') THEN 'B' ELSE 'A' END AS period, 1 AS v FROM olist_lab.orders o  WHERE ((o.order_purchase_timestamp >= '2018-03-01' AND o.order_purchase_timestamp < '2018-04-01') OR (o.order_purchase_timestamp >= '2018-04-01' AND o.order_purchase_timestamp < '2018-05-01')) GROUP BY o.order_id, 2), seg AS (SELECT DISTINCT b.order_id, CAST(op.payment_type AS TEXT) AS segment FROM base b JOIN olist_lab.orders o ON o.order_id = b.order_id JOIN olist_lab.order_payments op ON op.order_id = o.order_id) SELECT COALESCE(seg.segment, '(none)') AS segment, b.period, SUM(b.v) AS total, COUNT(b.v) AS n, COUNT(*) AS orders FROM base b LEFT JOIN seg ON seg.order_id = b.order_id GROUP BY 1, 2",
+   "sql_executed": "WITH base AS (SELECT o.order_id, CASE WHEN (o.order_purchase_timestamp >= '2018-04-01' AND o.order_purchase_timestamp < '2018-05-01') THEN 'B' ELSE 'A' END AS period, 1 AS v FROM olist_lab.orders AS o WHERE ((o.order_purchase_timestamp >= '2018-03-01' AND o.order_purchase_timestamp < '2018-04-01') OR (o.order_purchase_timestamp >= '2018-04-01' AND o.order_purchase_timestamp < '2018-05-01')) GROUP BY o.order_id, 2), seg AS (SELECT DISTINCT b.order_id, CAST(op.payment_type AS TEXT) AS segment FROM base AS b JOIN olist_lab.orders AS o ON o.order_id = b.order_id JOIN olist_lab.order_payments AS op ON op.order_id = o.order_id) SELECT COALESCE(seg.segment, '(none)') AS segment, b.period, SUM(b.v) AS total, COUNT(b.v) AS n, COUNT(*) AS orders FROM base AS b LEFT JOIN seg ON seg.order_id = b.order_id GROUP BY 1, 2 LIMIT 20000",
+   "row_count": 8,
+   "duration_ms": 120,
+   "preview": [
+    {
+     "segment": "credit_card",
+     "period": "B",
+     "total": 5079.0,
+     "n": 5079,
+     "orders": 5079
+    },
+    {
+     "segment": "credit_card",
+     "period": "A",
+     "total": 5674.0,
+     "n": 5674,
+     "orders": 5674
+    },
+    {
+     "segment": "voucher",
+     "period": "B",
+     "total": 224.0,
+     "n": 224,
+     "orders": 224
+    },
+    {
+     "segment": "boleto",
+     "period": "A",
+     "total": 1352.0,
+     "n": 1352,
+     "orders": 1352
+    },
+    {
+     "segment": "debit_card",
+     "period": "A",
+     "total": 78.0,
+     "n": 78,
+     "orders": 78
+    },
+    {
+     "segment": "debit_card",
+     "period": "B",
+     "total": 91.0,
+     "n": 91,
+     "orders": 91
+    },
+    {
+     "segment": "boleto",
+     "period": "B",
+     "total": 1206.0,
+     "n": 1206,
+     "orders": 1206
+    },
+    {
+     "segment": "voucher",
+     "period": "A",
+     "total": 272.0,
+     "n": 272,
+     "orders": 272
+    }
+   ]
+  },
+  {
+   "query_id": "Q8",
+   "purpose": "Inside customer_state=MG: number of orders by customer_city",
+   "sql_submitted": "WITH base AS (SELECT o.order_id, CASE WHEN (o.order_purchase_timestamp >= '2018-04-01' AND o.order_purchase_timestamp < '2018-05-01') THEN 'B' ELSE 'A' END AS period, 1 AS v FROM olist_lab.orders o  WHERE ((o.order_purchase_timestamp >= '2018-03-01' AND o.order_purchase_timestamp < '2018-04-01') OR (o.order_purchase_timestamp >= '2018-04-01' AND o.order_purchase_timestamp < '2018-05-01')) AND o.order_id IN (SELECT o.order_id FROM olist_lab.orders o JOIN olist_lab.customers c ON c.customer_id = o.customer_id WHERE CAST(c.customer_state AS TEXT) = 'MG') GROUP BY o.order_id, 2), seg AS (SELECT DISTINCT b.order_id, CAST(c.customer_city AS TEXT) AS segment FROM base b JOIN olist_lab.orders o ON o.order_id = b.order_id JOIN olist_lab.customers c ON c.customer_id = o.customer_id) SELECT COALESCE(seg.segment, '(none)') AS segment, b.period, SUM(b.v) AS total, COUNT(b.v) AS n, COUNT(*) AS orders FROM base b LEFT JOIN seg ON seg.order_id = b.order_id GROUP BY 1, 2",
+   "sql_executed": "WITH base AS (SELECT o.order_id, CASE WHEN (o.order_purchase_timestamp >= '2018-04-01' AND o.order_purchase_timestamp < '2018-05-01') THEN 'B' ELSE 'A' END AS period, 1 AS v FROM olist_lab.orders AS o WHERE ((o.order_purchase_timestamp >= '2018-03-01' AND o.order_purchase_timestamp < '2018-04-01') OR (o.order_purchase_timestamp >= '2018-04-01' AND o.order_purchase_timestamp < '2018-05-01')) AND o.order_id IN (SELECT o.order_id FROM olist_lab.orders AS o JOIN olist_lab.customers AS c ON c.customer_id = o.customer_id WHERE CAST(c.customer_state AS TEXT) = 'MG') GROUP BY o.order_id, 2), seg AS (SELECT DISTINCT b.order_id, CAST(c.customer_city AS TEXT) AS segment FROM base AS b JOIN olist_lab.orders AS o ON o.order_id = b.order_id JOIN olist_lab.customers AS c ON c.customer_id = o.customer_id) SELECT COALESCE(seg.segment, '(none)') AS segment, b.period, SUM(b.v) AS total, COUNT(b.v) AS n, COUNT(*) AS orders FROM base AS b LEFT JOIN seg ON seg.order_id = b.order_id GROUP BY 1, 2 LIMIT 20000",
+   "row_count": 376,
+   "duration_ms": 121,
+   "preview": [
+    {
+     "segment": "brumadinho",
+     "period": "A",
+     "total": 1.0,
+     "n": 1,
+     "orders": 1
+    },
+    {
+     "segment": "uberlandia",
+     "period": "A",
+     "total": 21.0,
+     "n": 21,
+     "orders": 21
+    },
+    {
+     "segment": "araxa",
+     "period": "A",
+     "total": 6.0,
+     "n": 6,
+     "orders": 6
+    },
+    {
+     "segment": "caxambu",
+     "period": "A",
+     "total": 2.0,
+     "n": 2,
+     "orders": 2
+    },
+    {
+     "segment": "ibiai",
+     "period": "A",
+     "total": 1.0,
+     "n": 1,
+     "orders": 1
+    },
+    {
+     "segment": "sao joao del rei",
+     "period": "A",
+     "total": 6.0,
+     "n": 6,
+     "orders": 6
+    },
+    {
+     "segment": "patrocinio do muriae",
+     "period": "A",
+     "total": 1.0,
+     "n": 1,
+     "orders": 1
+    },
+    {
+     "segment": "florestal",
+     "period": "B",
+     "total": 1.0,
+     "n": 1,
+     "orders": 1
+    },
+    {
+     "segment": "caratinga",
+     "period": "A",
+     "total": 9.0,
+     "n": 9,
+     "orders": 9
+    },
+    {
+     "segment": "piranguinho",
+     "period": "A",
+     "total": 4.0,
+     "n": 4,
+     "orders": 4
+    }
+   ]
+  },
+  {
+   "query_id": "Q9",
+   "purpose": "Inside customer_state=MG: number of orders by seller_id",
+   "sql_submitted": "WITH base AS (SELECT o.order_id, CASE WHEN (o.order_purchase_timestamp >= '2018-04-01' AND o.order_purchase_timestamp < '2018-05-01') THEN 'B' ELSE 'A' END AS period, 1 AS v FROM olist_lab.orders o  WHERE ((o.order_purchase_timestamp >= '2018-03-01' AND o.order_purchase_timestamp < '2018-04-01') OR (o.order_purchase_timestamp >= '2018-04-01' AND o.order_purchase_timestamp < '2018-05-01')) AND o.order_id IN (SELECT o.order_id FROM olist_lab.orders o JOIN olist_lab.customers c ON c.customer_id = o.customer_id WHERE CAST(c.customer_state AS TEXT) = 'MG') GROUP BY o.order_id, 2), seg AS (SELECT DISTINCT b.order_id, CAST(oi.seller_id AS TEXT) AS segment FROM base b JOIN olist_lab.orders o ON o.order_id = b.order_id JOIN olist_lab.order_items oi ON oi.order_id = o.order_id) SELECT COALESCE(seg.segment, '(none)') AS segment, b.period, SUM(b.v) AS total, COUNT(b.v) AS n, COUNT(*) AS orders FROM base b LEFT JOIN seg ON seg.order_id = b.order_id GROUP BY 1, 2",
+   "sql_executed": "WITH base AS (SELECT o.order_id, CASE WHEN (o.order_purchase_timestamp >= '2018-04-01' AND o.order_purchase_timestamp < '2018-05-01') THEN 'B' ELSE 'A' END AS period, 1 AS v FROM olist_lab.orders AS o WHERE ((o.order_purchase_timestamp >= '2018-03-01' AND o.order_purchase_timestamp < '2018-04-01') OR (o.order_purchase_timestamp >= '2018-04-01' AND o.order_purchase_timestamp < '2018-05-01')) AND o.order_id IN (SELECT o.order_id FROM olist_lab.orders AS o JOIN olist_lab.customers AS c ON c.customer_id = o.customer_id WHERE CAST(c.customer_state AS TEXT) = 'MG') GROUP BY o.order_id, 2), seg AS (SELECT DISTINCT b.order_id, CAST(oi.seller_id AS TEXT) AS segment FROM base AS b JOIN olist_lab.orders AS o ON o.order_id = b.order_id JOIN olist_lab.order_items AS oi ON oi.order_id = o.order_id) SELECT COALESCE(seg.segment, '(none)') AS segment, b.period, SUM(b.v) AS total, COUNT(b.v) AS n, COUNT(*) AS orders FROM base AS b LEFT JOIN seg ON seg.order_id = b.order_id GROUP BY 1, 2 LIMIT 20000",
+   "row_count": 583,
+   "duration_ms": 120,
+   "preview": [
+    {
+     "segment": "dbb9b48c841a0e39e21f98e1a6b2ec3e",
+     "period": "B",
+     "total": 1.0,
+     "n": 1,
+     "orders": 1
+    },
+    {
+     "segment": "9d4db00d65d7760644ac0c14edb5fd86",
+     "period": "A",
+     "total": 1.0,
+     "n": 1,
+     "orders": 1
+    },
+    {
+     "segment": "1835b56ce799e6a4dc4eddc053f04066",
+     "period": "A",
+     "total": 3.0,
+     "n": 3,
+     "orders": 3
+    },
+    {
+     "segment": "7c67e1448b00f6e969d365cea6b010ab",
+     "period": "A",
+     "total": 20.0,
+     "n": 20,
+     "orders": 20
+    },
+    {
+     "segment": "4d6d651bd7684af3fffabd5f08d12e5a",
+     "period": "A",
+     "total": 8.0,
+     "n": 8,
+     "orders": 8
+    },
+    {
+     "segment": "2528513dd95219a6013d4d05176e391a",
+     "period": "A",
+     "total": 3.0,
+     "n": 3,
+     "orders": 3
+    },
+    {
+     "segment": "cc419e0650a3c5ba77189a1882b7556a",
+     "period": "A",
+     "total": 13.0,
+     "n": 13,
+     "orders": 13
+    },
+    {
+     "segment": "57df9869a600bd6b7c405f2a862eccfb",
+     "period": "B",
+     "total": 1.0,
+     "n": 1,
+     "orders": 1
+    },
+    {
+     "segment": "c3cfdc648177fdbbbb35635a37472c53",
+     "period": "A",
+     "total": 1.0,
+     "n": 1,
+     "orders": 1
+    },
+    {
+     "segment": "7ea5bfa6c340f58f8e71fc1f0412b0d6",
+     "period": "A",
+     "total": 6.0,
+     "n": 6,
+     "orders": 6
+    }
+   ]
+  },
+  {
+   "query_id": "Q10",
+   "purpose": "Inside customer_state=MG: number of orders by seller_state",
+   "sql_submitted": "WITH base AS (SELECT o.order_id, CASE WHEN (o.order_purchase_timestamp >= '2018-04-01' AND o.order_purchase_timestamp < '2018-05-01') THEN 'B' ELSE 'A' END AS period, 1 AS v FROM olist_lab.orders o  WHERE ((o.order_purchase_timestamp >= '2018-03-01' AND o.order_purchase_timestamp < '2018-04-01') OR (o.order_purchase_timestamp >= '2018-04-01' AND o.order_purchase_timestamp < '2018-05-01')) AND o.order_id IN (SELECT o.order_id FROM olist_lab.orders o JOIN olist_lab.customers c ON c.customer_id = o.customer_id WHERE CAST(c.customer_state AS TEXT) = 'MG') GROUP BY o.order_id, 2), seg AS (SELECT DISTINCT b.order_id, CAST(s.seller_state AS TEXT) AS segment FROM base b JOIN olist_lab.orders o ON o.order_id = b.order_id JOIN olist_lab.order_items oi ON oi.order_id = o.order_id JOIN olist_lab.sellers s ON s.seller_id = oi.seller_id) SELECT COALESCE(seg.segment, '(none)') AS segment, b.period, SUM(b.v) AS total, COUNT(b.v) AS n, COUNT(*) AS orders FROM base b LEFT JOIN seg ON seg.order_id = b.order_id GROUP BY 1, 2",
+   "sql_executed": "WITH base AS (SELECT o.order_id, CASE WHEN (o.order_purchase_timestamp >= '2018-04-01' AND o.order_purchase_timestamp < '2018-05-01') THEN 'B' ELSE 'A' END AS period, 1 AS v FROM olist_lab.orders AS o WHERE ((o.order_purchase_timestamp >= '2018-03-01' AND o.order_purchase_timestamp < '2018-04-01') OR (o.order_purchase_timestamp >= '2018-04-01' AND o.order_purchase_timestamp < '2018-05-01')) AND o.order_id IN (SELECT o.order_id FROM olist_lab.orders AS o JOIN olist_lab.customers AS c ON c.customer_id = o.customer_id WHERE CAST(c.customer_state AS TEXT) = 'MG') GROUP BY o.order_id, 2), seg AS (SELECT DISTINCT b.order_id, CAST(s.seller_state AS TEXT) AS segment FROM base AS b JOIN olist_lab.orders AS o ON o.order_id = b.order_id JOIN olist_lab.order_items AS oi ON oi.order_id = o.order_id JOIN olist_lab.sellers AS s ON s.seller_id = oi.seller_id) SELECT COALESCE(seg.segment, '(none)') AS segment, b.period, SUM(b.v) AS total, COUNT(b.v) AS n, COUNT(*) AS orders FROM base AS b LEFT JOIN seg ON seg.order_id = b.order_id GROUP BY 1, 2 LIMIT 20000",
+   "row_count": 24,
+   "duration_ms": 93,
+   "preview": [
+    {
+     "segment": "PR",
+     "period": "A",
+     "total": 61.0,
+     "n": 61,
+     "orders": 61
+    },
+    {
+     "segment": "MG",
+     "period": "B",
+     "total": 48.0,
+     "n": 48,
+     "orders": 48
+    },
+    {
+     "segment": "RJ",
+     "period": "B",
+     "total": 12.0,
+     "n": 12,
+     "orders": 12
+    },
+    {
+     "segment": "MG",
+     "period": "A",
+     "total": 99.0,
+     "n": 99,
+     "orders": 99
+    },
+    {
+     "segment": "PR",
+     "period": "B",
+     "total": 20.0,
+     "n": 20,
+     "orders": 20
+    },
+    {
+     "segment": "RJ",
+     "period": "A",
+     "total": 46.0,
+     "n": 46,
+     "orders": 46
+    },
+    {
+     "segment": "PE",
+     "period": "B",
+     "total": 6.0,
+     "n": 6,
+     "orders": 6
+    },
+    {
+     "segment": "SC",
+     "period": "B",
+     "total": 9.0,
+     "n": 9,
+     "orders": 9
+    },
+    {
+     "segment": "GO",
+     "period": "B",
+     "total": 3.0,
+     "n": 3,
+     "orders": 3
+    },
+    {
+     "segment": "RS",
+     "period": "B",
+     "total": 7.0,
+     "n": 7,
+     "orders": 7
+    }
+   ]
+  },
+  {
+   "query_id": "Q11",
+   "purpose": "Inside customer_state=MG: number of orders by product_category",
+   "sql_submitted": "WITH base AS (SELECT o.order_id, CASE WHEN (o.order_purchase_timestamp >= '2018-04-01' AND o.order_purchase_timestamp < '2018-05-01') THEN 'B' ELSE 'A' END AS period, 1 AS v FROM olist_lab.orders o  WHERE ((o.order_purchase_timestamp >= '2018-03-01' AND o.order_purchase_timestamp < '2018-04-01') OR (o.order_purchase_timestamp >= '2018-04-01' AND o.order_purchase_timestamp < '2018-05-01')) AND o.order_id IN (SELECT o.order_id FROM olist_lab.orders o JOIN olist_lab.customers c ON c.customer_id = o.customer_id WHERE CAST(c.customer_state AS TEXT) = 'MG') GROUP BY o.order_id, 2), seg AS (SELECT DISTINCT b.order_id, CAST(p.product_category_name AS TEXT) AS segment FROM base b JOIN olist_lab.orders o ON o.order_id = b.order_id JOIN olist_lab.order_items oi ON oi.order_id = o.order_id JOIN olist_lab.products p ON p.product_id = oi.product_id) SELECT COALESCE(seg.segment, '(none)') AS segment, b.period, SUM(b.v) AS total, COUNT(b.v) AS n, COUNT(*) AS orders FROM base b LEFT JOIN seg ON seg.order_id = b.order_id GROUP BY 1, 2",
+   "sql_executed": "WITH base AS (SELECT o.order_id, CASE WHEN (o.order_purchase_timestamp >= '2018-04-01' AND o.order_purchase_timestamp < '2018-05-01') THEN 'B' ELSE 'A' END AS period, 1 AS v FROM olist_lab.orders AS o WHERE ((o.order_purchase_timestamp >= '2018-03-01' AND o.order_purchase_timestamp < '2018-04-01') OR (o.order_purchase_timestamp >= '2018-04-01' AND o.order_purchase_timestamp < '2018-05-01')) AND o.order_id IN (SELECT o.order_id FROM olist_lab.orders AS o JOIN olist_lab.customers AS c ON c.customer_id = o.customer_id WHERE CAST(c.customer_state AS TEXT) = 'MG') GROUP BY o.order_id, 2), seg AS (SELECT DISTINCT b.order_id, CAST(p.product_category_name AS TEXT) AS segment FROM base AS b JOIN olist_lab.orders AS o ON o.order_id = b.order_id JOIN olist_lab.order_items AS oi ON oi.order_id = o.order_id JOIN olist_lab.products AS p ON p.product_id = oi.product_id) SELECT COALESCE(seg.segment, '(none)') AS segment, b.period, SUM(b.v) AS total, COUNT(b.v) AS n, COUNT(*) AS orders FROM base AS b LEFT JOIN seg ON seg.order_id = b.order_id GROUP BY 1, 2 LIMIT 20000",
+   "row_count": 86,
+   "duration_ms": 105,
+   "preview": [
+    {
+     "segment": "malas_acessorios",
+     "period": "A",
+     "total": 8.0,
+     "n": 8,
+     "orders": 8
+    },
+    {
+     "segment": "cama_mesa_banho",
+     "period": "A",
+     "total": 86.0,
+     "n": 86,
+     "orders": 86
+    },
+    {
+     "segment": "utilidades_domesticas",
+     "period": "A",
+     "total": 43.0,
+     "n": 43,
+     "orders": 43
+    },
+    {
+     "segment": "construcao_ferramentas_construcao",
+     "period": "B",
+     "total": 5.0,
+     "n": 5,
+     "orders": 5
+    },
+    {
+     "segment": "eletrodomesticos",
+     "period": "A",
+     "total": 10.0,
+     "n": 10,
+     "orders": 10
+    },
+    {
+     "segment": "fashion_bolsas_e_acessorios",
+     "period": "A",
+     "total": 13.0,
+     "n": 13,
+     "orders": 13
+    },
+    {
+     "segment": "artigos_de_natal",
+     "period": "B",
+     "total": 2.0,
+     "n": 2,
+     "orders": 2
+    },
+    {
+     "segment": "portateis_casa_forno_e_cafe",
+     "period": "B",
+     "total": 1.0,
+     "n": 1,
+     "orders": 1
+    },
+    {
+     "segment": "livros_tecnicos",
+     "period": "A",
+     "total": 3.0,
+     "n": 3,
+     "orders": 3
+    },
+    {
+     "segment": "telefonia_fixa",
+     "period": "A",
+     "total": 1.0,
+     "n": 1,
+     "orders": 1
+    }
+   ]
+  },
+  {
+   "query_id": "Q12",
+   "purpose": "Inside customer_state=MG: number of orders by payment_type",
+   "sql_submitted": "WITH base AS (SELECT o.order_id, CASE WHEN (o.order_purchase_timestamp >= '2018-04-01' AND o.order_purchase_timestamp < '2018-05-01') THEN 'B' ELSE 'A' END AS period, 1 AS v FROM olist_lab.orders o  WHERE ((o.order_purchase_timestamp >= '2018-03-01' AND o.order_purchase_timestamp < '2018-04-01') OR (o.order_purchase_timestamp >= '2018-04-01' AND o.order_purchase_timestamp < '2018-05-01')) AND o.order_id IN (SELECT o.order_id FROM olist_lab.orders o JOIN olist_lab.customers c ON c.customer_id = o.customer_id WHERE CAST(c.customer_state AS TEXT) = 'MG') GROUP BY o.order_id, 2), seg AS (SELECT DISTINCT b.order_id, CAST(op.payment_type AS TEXT) AS segment FROM base b JOIN olist_lab.orders o ON o.order_id = b.order_id JOIN olist_lab.order_payments op ON op.order_id = o.order_id) SELECT COALESCE(seg.segment, '(none)') AS segment, b.period, SUM(b.v) AS total, COUNT(b.v) AS n, COUNT(*) AS orders FROM base b LEFT JOIN seg ON seg.order_id = b.order_id GROUP BY 1, 2",
+   "sql_executed": "WITH base AS (SELECT o.order_id, CASE WHEN (o.order_purchase_timestamp >= '2018-04-01' AND o.order_purchase_timestamp < '2018-05-01') THEN 'B' ELSE 'A' END AS period, 1 AS v FROM olist_lab.orders AS o WHERE ((o.order_purchase_timestamp >= '2018-03-01' AND o.order_purchase_timestamp < '2018-04-01') OR (o.order_purchase_timestamp >= '2018-04-01' AND o.order_purchase_timestamp < '2018-05-01')) AND o.order_id IN (SELECT o.order_id FROM olist_lab.orders AS o JOIN olist_lab.customers AS c ON c.customer_id = o.customer_id WHERE CAST(c.customer_state AS TEXT) = 'MG') GROUP BY o.order_id, 2), seg AS (SELECT DISTINCT b.order_id, CAST(op.payment_type AS TEXT) AS segment FROM base AS b JOIN olist_lab.orders AS o ON o.order_id = b.order_id JOIN olist_lab.order_payments AS op ON op.order_id = o.order_id) SELECT COALESCE(seg.segment, '(none)') AS segment, b.period, SUM(b.v) AS total, COUNT(b.v) AS n, COUNT(*) AS orders FROM base AS b LEFT JOIN seg ON seg.order_id = b.order_id GROUP BY 1, 2 LIMIT 20000",
+   "row_count": 8,
+   "duration_ms": 99,
+   "preview": [
+    {
+     "segment": "boleto",
+     "period": "A",
+     "total": 170.0,
+     "n": 170,
+     "orders": 170
+    },
+    {
+     "segment": "debit_card",
+     "period": "A",
+     "total": 5.0,
+     "n": 5,
+     "orders": 5
+    },
+    {
+     "segment": "credit_card",
+     "period": "A",
+     "total": 688.0,
+     "n": 688,
+     "orders": 688
+    },
+    {
+     "segment": "voucher",
+     "period": "A",
+     "total": 37.0,
+     "n": 37,
+     "orders": 37
+    },
+    {
+     "segment": "credit_card",
+     "period": "B",
+     "total": 260.0,
+     "n": 260,
+     "orders": 260
+    },
+    {
+     "segment": "boleto",
+     "period": "B",
+     "total": 57.0,
+     "n": 57,
+     "orders": 57
+    },
+    {
+     "segment": "debit_card",
+     "period": "B",
+     "total": 5.0,
+     "n": 5,
+     "orders": 5
+    },
+    {
+     "segment": "voucher",
+     "period": "B",
+     "total": 9.0,
+     "n": 9,
+     "orders": 9
+    }
+   ]
+  },
+  {
+   "query_id": "Q13",
+   "purpose": "Duplicate-row check on orders",
+   "sql_submitted": "SELECT CASE WHEN (o.order_purchase_timestamp >= '2018-04-01' AND o.order_purchase_timestamp < '2018-05-01') THEN 'B' ELSE 'A' END AS period, COUNT(*) AS row_count, COUNT(DISTINCT o.order_id) AS distinct_keys FROM olist_lab.orders o  WHERE ((o.order_purchase_timestamp >= '2018-03-01' AND o.order_purchase_timestamp < '2018-04-01') OR (o.order_purchase_timestamp >= '2018-04-01' AND o.order_purchase_timestamp < '2018-05-01')) GROUP BY 1",
+   "sql_executed": "SELECT CASE WHEN (o.order_purchase_timestamp >= '2018-04-01' AND o.order_purchase_timestamp < '2018-05-01') THEN 'B' ELSE 'A' END AS period, COUNT(*) AS row_count, COUNT(DISTINCT o.order_id) AS distinct_keys FROM olist_lab.orders AS o WHERE ((o.order_purchase_timestamp >= '2018-03-01' AND o.order_purchase_timestamp < '2018-04-01') OR (o.order_purchase_timestamp >= '2018-04-01' AND o.order_purchase_timestamp < '2018-05-01')) GROUP BY 1 LIMIT 1000",
+   "row_count": 2,
+   "duration_ms": 48,
+   "preview": [
+    {
+     "period": "B",
+     "row_count": 6480,
+     "distinct_keys": 6480
+    },
+    {
+     "period": "A",
+     "row_count": 7211,
+     "distinct_keys": 7211
+    }
+   ]
+  }
+ ],
+ "usage": {
+  "calls": 3,
+  "prompt_tokens": 5698,
+  "completion_tokens": 1429,
+  "cost_usd": 0.007453,
+  "latency_s": 22.4,
+  "models": [
+   "gemini/gemini-3.6-flash",
+   "gemini/gemini-flash-lite-latest"
+  ]
+ },
+ "duration_s": 41.24,
+ "saved_at": "2026-09-25"
+}
