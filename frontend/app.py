@@ -122,7 +122,7 @@ def show_report(result: dict) -> None:
             if q.get("preview"):
                 st.dataframe(pd.DataFrame(q["preview"]), hide_index=True)
 
-    fb = st.columns([1, 1, 6])
+    fb = st.columns([1, 1.5, 5])  # BUG-001: "Not helpful" was cut off at 1400 px
     if fb[0].button("👍 Helpful", key=f"up{result['run_id']}"):
         app_store.add_feedback(result["run_id"], 1, None)
         st.toast("Thanks!")
@@ -147,6 +147,14 @@ with ask_tab:
         show_report(st.session_state["last_result"])
 
 with history_tab:
+    check = app_store.verify_audit()
+    if check["intact"]:
+        st.success(f"Audit trail intact: {check['entries']} hash-chained entries verified, and every stored answer "
+                   "matches what was recorded.")
+    else:
+        st.error(f"Audit trail problem: {len(check['problems'])} issue(s). Stored answers may have been changed "
+                 "outside the app.")
+        st.dataframe(pd.DataFrame(check["problems"]), hide_index=True, width="stretch")
     history = app_store.list_runs(50)
     if history:
         st.dataframe(pd.DataFrame(history), hide_index=True, width="stretch")

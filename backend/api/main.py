@@ -76,6 +76,18 @@ def feedback(run_id: str, req: FeedbackRequest) -> dict:
     return {"saved": True}
 
 
+@app.get("/audit/log")
+def audit_log(limit: int = 50) -> list[dict]:
+    """Tamper-evident log: one hash-chained entry per saved run and per feedback, newest first."""
+    return app_store.audit_log(limit)
+
+
+@app.get("/audit/verify")
+def audit_verify() -> dict:
+    """Recompute the hash chain and compare every run with what was logged (21 CFR Part 11 §11.10(e))."""
+    return app_store.verify_audit()
+
+
 @app.get("/anomalies")
 def anomalies(dataset: str = config.LAB_SCHEMA, threshold: float = 6.0) -> list[dict]:
     """Unusual days in key metrics (STL + robust z-score). Each one is a good question to ask RootCause."""
